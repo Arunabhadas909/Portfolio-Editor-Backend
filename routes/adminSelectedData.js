@@ -94,7 +94,7 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
                 }
             )
 
-                res.json({
+             return   res.json({
                     msg:"Data updated",
                     // skill: name,
                         username:username,
@@ -121,7 +121,7 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
                         createdAt: new Date(),
                     });
 
-                res.json({
+              return  res.json({
                      username:username,
                         designation:designation,
                         previewUrl: previewUrl,
@@ -137,7 +137,7 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
   
         }catch(err){
 
-        res.status(500).json({
+       return res.status(500).json({
 
             error:err.message,
         })
@@ -155,11 +155,16 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
         try
         {
 
+
+
             const lastEnteredData = await Data.findOne().sort({_id: -1}).exec();
+
+
+
 
             if(!lastEnteredData)
                 {
-                    res.status(404).json({
+                  return  res.status(404).json({
 
                         msg : "No Data Found",
                 })
@@ -169,7 +174,7 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
                 const base64previewUrl = lastEnteredData.previewUrl.toString('base64');
 
                 // console.log(lastEnteredData);
-                res.json({
+            return   res.json({
                    
                     previewUrl:base64previewUrl,
                     mimeType:lastEnteredData.mimeType,
@@ -186,7 +191,7 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
         catch(error)
         {
 
-            res.json({
+           return res.json({
 
                     error: error
                 });

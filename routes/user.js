@@ -46,7 +46,7 @@ routes.post('/addUser', async (req, res)=>{
                 //     }
                 }
             )
-                res.json({
+             return   res.json({
 
                     msg:"User Updated Successfully"
                 })
@@ -64,7 +64,7 @@ routes.post('/addUser', async (req, res)=>{
 
             })
 
-            res.json({
+          return  res.json({
 
                 msg:"User added Successfully",
             })
@@ -72,7 +72,7 @@ routes.post('/addUser', async (req, res)=>{
     }
     catch(err){
 
-        res.status(500).json({
+    return  res.status(500).json({
 
             error:err.message,
         })

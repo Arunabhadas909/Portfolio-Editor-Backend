@@ -22,7 +22,7 @@ routes.get('/project', async (req,res)=>
             return tag ? tag.getAttribute('content') : '';
             };
 
-            res.json({
+        return   res.json({
 
                 title: getMeta('og:title'),
                 description: getMeta('og:description'),
@@ -32,7 +32,7 @@ routes.get('/project', async (req,res)=>
             });
         }catch(err)
         {
-            res.status(500).json({error: err.message});
+          return res.status(500).json({error: err.message});
         }
 
 
@@ -70,7 +70,7 @@ routes.get('/project', async (req,res)=>
                 }
             )
 
-                res.json({
+             return   res.json({
                     msg:"Project updated",
                     skill: name,
                 })
@@ -84,7 +84,7 @@ routes.get('/project', async (req,res)=>
 
                     });
 
-                res.json({
+           return  res.json({
                     projectLink:projectLink,
                     projectDescription:projectDescription,
                     msg:"Project Added"
@@ -95,7 +95,7 @@ routes.get('/project', async (req,res)=>
         }
         catch(err)
         {
-            res.status(500).json({
+         return  res.status(500).json({
                 error: err.message
             })
         }
@@ -123,7 +123,7 @@ routes.get('/project', async (req,res)=>
                     img:img,
                 })
 
-                res.json({
+              return  res.json({
                     msg:"Skill updated",
                     skill: name,
                 })
@@ -136,7 +136,7 @@ routes.get('/project', async (req,res)=>
 
                     });
 
-                res.json({
+               return res.json({
                     name:name,
                     img:img,
                     msg:"Skills Added"
@@ -147,7 +147,7 @@ routes.get('/project', async (req,res)=>
         }
         catch(err)
         {
-            res.status(500).json({
+         return  res.status(500).json({
                 error: err.message
             })
         }
@@ -166,20 +166,23 @@ routes.get('/project', async (req,res)=>
         {
         if(skillFound)
         {
-            res.json({
+         
+         return   res.json({
                 name: name,
                 img:skillFound.img,
 
             });
         }else
         {
-            res.status(403).json({
+        
+        return    res.status(403).json({
                 msg:"Skill not found",
             })
         }
 
         }catch(err){
-            res.status(500).json({
+         
+         return   res.status(500).json({
                     error:err.message,
             })
         }
