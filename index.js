@@ -10,7 +10,7 @@ const app = express();
 
 app.use(express.json());
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json({ limit: '100mb' })); // For application/json
 app.use(bodyParser.urlencoded({ extended: true, limit: '100mb' })); // For application/x-www-form-urlencoded
 app.use(cors({
