@@ -1,7 +1,12 @@
 // const { string } = require('mathjs');
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb+srv://arunabha909:Arunabhadas%40909@cluster0.io3lfs7.mongodb.net/portfolio");
+// mongoose.connect("mongodb+srv://arunabha909:Arunabhadas%40909@cluster0.io3lfs7.mongodb.net/portfolio");
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
 
 
 const UserSchema = new mongoose.Schema({
