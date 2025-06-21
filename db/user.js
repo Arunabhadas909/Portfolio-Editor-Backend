@@ -1,4 +1,4 @@
-const { string } = require('mathjs');
+// const { string } = require('mathjs');
 const mongoose = require('mongoose');
 
 mongoose.connect("mongodb+srv://arunabha909:Arunabhadas%40909@cluster0.io3lfs7.mongodb.net/portfolio");
