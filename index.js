@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json({ limit: '100mb' })); // For application/json
 app.use(bodyParser.urlencoded({ extended: true, limit: '100mb' })); // For application/x-www-form-urlencoded
 app.use(cors({
-  origin: ['https://portfolio-arunabha.netlify.app', 'https://arunsprotfolioeditor.netlify.app'],
+  origin: ['https://arun-portfolio-editor.netlify.app/', 'https://arunabha-portfolio.netlify.app/'],
   credentials: true,
 }));
 
