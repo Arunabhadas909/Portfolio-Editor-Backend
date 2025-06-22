@@ -50,7 +50,7 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
     const username = parsedData.username;
     const designation = parsedData.designation;
     const textEntered = parsedData.textEntered;
-    const skills = parsedData .skills;
+    const skillsInput = parsedData .skills;
     const projects= parsedData .projects;
     const coverLettertextEntered = parsedData .coverLettertextEntered;
 
@@ -72,7 +72,7 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
     // const mimeType = req.file ? req.file.mimetype : null;
 
     // Step 1: Resolve or create Skill ObjectIds
-    const skillIds = await Promise.all(
+    const skillsIds = await Promise.all(
       skillsInput.map(async (skill) => {
         let found = await Skills.findOne({ name: skill.name });
 
@@ -181,8 +181,10 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
                         coverLettertextEntered : coverLettertextEntered,
                     msg:"Data Saved"
                 })
-            }
 
+                  
+            }
+          
   
         }catch(err){
 
