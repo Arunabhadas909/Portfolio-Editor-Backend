@@ -30,8 +30,20 @@ const upload = multer({
 routes.post('/data', upload.single('image') ,async (req,res)=>
     {
         console.log("posting data");
-    const previewUrl = req.file.buffer; 
-    const mimeType = req.file.mimetype;    
+
+        let previewUrl = null;
+        let mimeType = null;
+
+        if(req.file)
+            {
+             previewUrl = req.file.buffer; 
+            mimeType = req.file.mimetype;   
+            }
+            else
+            {
+                console.log("No image file uploaded — skipping image processing");
+            }
+  
     
     
     const parsedData = JSON.parse(req.body.data);
