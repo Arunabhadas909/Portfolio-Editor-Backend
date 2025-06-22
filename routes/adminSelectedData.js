@@ -172,7 +172,7 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
             const lastEnteredData = await Data.findOne().sort({_id: -1}).exec();
 
 
-
+            const skills = await lastEnteredData.find({}).populate('skills', 'name img');
 
             if(!lastEnteredData)
                 {
