@@ -12,7 +12,7 @@ mongoose.connect(process.env.MONGO_URI);
 const SkillsSchema = new mongoose.Schema({
 
     name:String,
-    img:String
+    img:String,
 
     })
 

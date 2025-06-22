@@ -1,5 +1,8 @@
 const express= require('express');
 // const { string } = require('mathjs');
+// import { Skills } from '.db/admin';
+
+const {skills} = require('./admin');
 const mongoose = require('mongoose');
 // const jwt = require('jsonwebtoken');
 // const bodyParser = require('')
@@ -21,7 +24,14 @@ const DataSelected = new mongoose.Schema({
     previewUrl: { type: Buffer,  default: null},
     textEntered: String,
     mimeType:String,
-    skills:[{ name:String, img:String,} ],
+    // skills:[{ name:String, img:String,} ],
+
+
+    skills:[{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Skills'
+    
+            }],
     projects:[{title: String, description:String, img:String, url:String } ],
     coverLettertextEntered: String,
 
@@ -34,7 +44,15 @@ const DataSelected = new mongoose.Schema({
                 previewUrl: { type: Buffer,  default: null},
                 mimeType:String,
                 textEntered: String,
-                skills:[{ name:String, img:String,} ],
+                // skills:[{ name:String, img:String,} ],
+
+
+                 skills:[{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Skills'
+    
+            }],
+
                 projects:[{title: String, description:String, img:String, url:String } ],
                 coverLettertextEntered: String,
                 createdAt: { type: Date, default: Date.now },

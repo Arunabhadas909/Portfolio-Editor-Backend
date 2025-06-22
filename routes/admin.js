@@ -42,12 +42,12 @@ routes.get('/project', async (req,res)=>
         const projectLink = req.body.projectLink;
         const projectDescription = req.body.projectDescription;
 
-        // const projectFound = await Projects.findOne({
-        //     projectLink:projectLink,
+        const projectFound = await Projects.findOne({
+            projectLink:projectLink,
 
-        //     // img:img,
-        // })
-            const projectFound = await Data.findOne().sort({_id: -1}).exec();
+            // img:img,
+        })
+
         try
         {
             if(projectFound)
@@ -121,7 +121,19 @@ routes.get('/project', async (req,res)=>
 
                     name:name,
                     img:img,
-                })
+                },
+            
+            {
+
+                '$push':
+                {
+                        skills:
+                        {
+                            name:name,
+                            img : img,
+                        }
+                }
+            })
 
               return  res.json({
                     msg:"Skill updated",
@@ -158,12 +170,10 @@ routes.get('/project', async (req,res)=>
         const name = req.query.name;
         // const img = req.headers.image;
 
-        // const skillFound = await Skills.findOne({
-        //     name:name,
-        //     // img:img,
-        // })
-
-         const skillFound = await Data.findOne().sort({_id: -1}).exec();
+        const skillFound = await Skills.findOne({
+            name:name,
+            // img:img,
+        })
         try
         {
         if(skillFound)
@@ -190,5 +200,6 @@ routes.get('/project', async (req,res)=>
         }
   
     })
+    
 
     module.exports = routes;
