@@ -54,6 +54,43 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
     const projects= parsedData .projects;
     const coverLettertextEntered = parsedData .coverLettertextEntered;
 
+
+
+    //   try {
+    // const parsedData = JSON.parse(req.body.data);
+
+    // const {
+    //   username,
+    //   designation,
+    //   textEntered,
+    //   projects,
+    //   coverLettertextEntered,
+    //   skills: skillsInput
+    // } = parsedData;
+
+    // const previewUrl = req.file ? req.file.buffer : null;
+    // const mimeType = req.file ? req.file.mimetype : null;
+
+    // Step 1: Resolve or create Skill ObjectIds
+    const skillIds = await Promise.all(
+      skillsInput.map(async (skill) => {
+        let found = await Skills.findOne({ name: skill.name });
+
+        if (!found) {
+          found = await Skills.create(skill); // { name, img }
+        }
+
+        return found._id;
+      })
+    );
+
+
+
+
+
+
+
+
          const dataFound = await Data.findOne({
             
             username:username,
@@ -61,7 +98,7 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
             previewUrl: previewUrl,
             mimeType:mimeType,      
             textEntered: textEntered,
-            skills : skills,
+            skills : skillsInput,
             projects: projects,
             coverLettertextEntered : coverLettertextEntered,
         });
@@ -98,7 +135,7 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
                             previewUrl: previewUrl,
                             mimeType:mimeType,      
                             textEntered: textEntered,
-                            skills : skills,
+                            skills : skillsIds,
                             projects: projects,
                             coverLettertextEntered : coverLettertextEntered,
                         }
@@ -114,7 +151,7 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
                         previewUrl: previewUrl,
                         mimeType:mimeType,      
                         textEntered: textEntered,
-                        skills : skills,
+                        skills : skillsIds,
                         projects: projects,
                         coverLettertextEntered : coverLettertextEntered,
                 })
@@ -127,7 +164,7 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
                         previewUrl: previewUrl,
                         mimeType:mimeType,      
                         textEntered: textEntered,
-                        skills : skills,
+                        skills : skillsIds,
                         projects: projects,
                         coverLettertextEntered : coverLettertextEntered,
                         createdAt: new Date(),
@@ -139,7 +176,7 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
                         previewUrl: previewUrl,
                         mimeType:mimeType,      
                         textEntered: textEntered,
-                        skills : skills,
+                        skills : skillsIds,
                         projects: projects,
                         coverLettertextEntered : coverLettertextEntered,
                     msg:"Data Saved"
@@ -169,10 +206,13 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
 
 
 
-            const lastEnteredData = await Data.findOne().sort({_id: -1}).exec();
+            // const lastEnteredData = await Data.findOne().sort({_id: -1}).exec();
+            const lastEnteredData = await Data.findOne()
+            .sort({ _id: -1 })
+            .populate('skills', 'name img') // top-level skills
+            .populate('newData.skills', 'name img').exec(); // nested skills
 
-
-            const skills = await lastEnteredData.find({}).populate('skills', 'name img');
+            // const skills = await lastEnteredData.find({}).populate('skills', 'name img');
 
             if(!lastEnteredData)
                 {
