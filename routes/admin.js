@@ -42,7 +42,7 @@ routes.get('/project', async (req,res)=>
         const projectLink = req.body.projectLink;
         const projectDescription = req.body.projectDescription;
 
-        const projectFound = await Skills.findOne({
+        const projectFound = await Projects.findOne({
             projectLink:projectLink,
 
             // img:img,
