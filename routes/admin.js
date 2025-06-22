@@ -42,12 +42,12 @@ routes.get('/project', async (req,res)=>
         const projectLink = req.body.projectLink;
         const projectDescription = req.body.projectDescription;
 
-        const projectFound = await Projects.findOne({
-            projectLink:projectLink,
+        // const projectFound = await Projects.findOne({
+        //     projectLink:projectLink,
 
-            // img:img,
-        })
-
+        //     // img:img,
+        // })
+            const projectFound = await Data.findOne().sort({_id: -1}).exec();
         try
         {
             if(projectFound)
@@ -158,10 +158,12 @@ routes.get('/project', async (req,res)=>
         const name = req.query.name;
         // const img = req.headers.image;
 
-        const skillFound = await Skills.findOne({
-            name:name,
-            // img:img,
-        })
+        // const skillFound = await Skills.findOne({
+        //     name:name,
+        //     // img:img,
+        // })
+
+         const skillFound = await Data.findOne().sort({_id: -1}).exec();
         try
         {
         if(skillFound)
