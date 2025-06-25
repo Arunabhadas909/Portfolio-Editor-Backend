@@ -3,6 +3,9 @@ const express = require("express");
 const fs = require('fs');
 const {Skills } =require('../db/admin')
 
+
+const nodemailer = require('nodemailer');
+
 const app = express();
 
 const bodyParser = require('body-parser');
@@ -259,6 +262,37 @@ routes.post('/data', upload.single('image') ,async (req,res)=>
         }
 
     })
+
+
+
+
+
+    routes.post('/contact', async (req, res) => {
+  const { name, email, message } = req.body;
+
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS
+    }
+  });
+
+  const mailOptions = {
+    from: email,
+    to: process.env.GMAIL_USER,
+    subject: `Contact form submission from ${name}`,
+    text: `Message:\n${message}\n\nEmail: ${email}`
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).send({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ success: false });
+  }
+});
 
 
     // routes.get('/data', async(req,res)=>{

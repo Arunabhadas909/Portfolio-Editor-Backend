@@ -123,17 +123,20 @@ routes.get('/project', async (req,res)=>
                     img:img,
                 },
             
-            {
+            // {
+                
+            //     '$push':
+            //     {
+            //             skills:
+            //             {
+            //                 // name:name,
+            //                 // img : img,
 
-                '$push':
-                {
-                        skills:
-                        {
-                            name:name,
-                            img : img,
-                        }
-                }
-            })
+                            
+            //             }
+            //     }
+            // }
+            )
 
               return  res.json({
                     msg:"Skill updated",
